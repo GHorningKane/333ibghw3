@@ -15,4 +15,12 @@ class UserModel extends Database
 
     }
 
+    // parallel to getUsers
+    public function getRatings($limit)
+
+    {
+
+        return $this->select("SELECT * FROM ratings ORDER BY id ASC LIMIT ?", ["i", $limit]);
+
+    }
 }
