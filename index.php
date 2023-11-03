@@ -1,4 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin:*'); // * represents allowing requests from any website
+header('Access-Control-Allow-Headers:*'); // * Allowable request types
+header('Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE'); // * Allowable request methods
+header('Access-Control-Allow-Credentials: true'); // * Set whether sending cookies is allowed
 
 require __DIR__ . "/inc/bootstrap.php";
 
