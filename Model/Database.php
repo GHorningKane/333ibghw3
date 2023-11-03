@@ -54,6 +54,24 @@ class Database
 
     }
 
+    public function create($query = "" , $params = [])
+
+    {
+
+        try {
+
+            $stmt = $this->executeStatement( $query , $params );
+            $result = $stmt->get_result();				
+            $stmt->close();
+            return $result;
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+
+        return false;
+
+    }
+
     private function executeStatement($query = "" , $params = [])
 
     {
@@ -70,7 +88,7 @@ class Database
 
             if( $params ) {
 
-                $stmt->bind_param($params[0], $params[1]);
+                $stmt->bind_param(...$params);
 
             }
 
