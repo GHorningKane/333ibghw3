@@ -1,3 +1,4 @@
+// Fully Functional Stars rating system with associated rating values 1-5
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
