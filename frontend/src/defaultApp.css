@@ -1,18 +1,5 @@
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  min-height: 100vh;
   text-align: center;
-}
-
-input[type= "radio"] {
-  display: none;
-}
-
-.star {
-  cursor: pointer;
-  transition: color 200ms;
 }
 
 .App-logo {
@@ -49,4 +36,3 @@ input[type= "radio"] {
     transform: rotate(360deg);
   }
 }
-
