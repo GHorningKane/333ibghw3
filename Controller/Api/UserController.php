@@ -35,17 +35,17 @@ class UserController extends BaseController
                 $userModel = new UserModel();
 
                 $intLimit = 10;
-                echo"aaa\n";
-                echo $_GET['limit'];
-                echo"bbb\n";
+                // echo"aaa\n";
+                // echo $_GET['limit'];
+                // echo"bbb\n";
 
 
 
                 if (isset($arrQueryStringParams['limit']) && $arrQueryStringParams['limit']) {
 
                     $intLimit = $arrQueryStringParams['limit'];
-                    echo $intlimit;
-                    echo "FKDJF:SDKJFL";
+                    // echo $intlimit;
+                    // echo "FKDJF:SDKJFL";
 
                 }
                 // echo"a\n";
@@ -148,6 +148,45 @@ class UserController extends BaseController
 
         }
 
+    }
+
+    public function loginAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $leusername = $_GET['username'];
+        $lepassword = $_GET['password'];
+        $userModel = new UserModel();
+        if (strtoupper($requestMethod) == 'GET') {
+            try {
+                $arrUsers = $userModel->login($leusername, $lepassword);
+                $responseData = json_encode($arrUsers);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } 
+    }
+    public function addAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $leusername = $_GET['username'];
+        $lesong = $_GET['song'];
+        $leartist = $_GET['artist'];
+        $lerating = $_GET['rating'];
+
+        
+        $userModel = new UserModel();
+        if (strtoupper($requestMethod) == 'POST') {
+            try {
+                $arrUsers = $userModel->insertSong($leusername, $lesong, $leartist, $lerating);
+                $responseData = json_encode($arrUsers);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } 
     }
 
 }

@@ -35,9 +35,20 @@ class Database
     {
 
         try {
-
+            $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            if($stmt = mysqli_prepare($connection, $query)){
+                mysqli_stmt_bind_param($stmt, "s", $params[1]);
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_store_result($stmt);
+                    if(mysqli_stmt_num_rows($stmt) == 0){ //username not taken
+                        echo "presumably not in database\n";
+                        return "num_rows==0";
+                    }
+                    else{
+                        // echo "psych!";
+                    }
+                }}
             $stmt = $this->executeStatement( $query , $params );
-
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);				
 
             $stmt->close();
@@ -45,7 +56,7 @@ class Database
             return $result;
 
         } catch(Exception $e) {
-
+            
             throw New Exception( $e->getMessage() );
 
         }
@@ -71,6 +82,40 @@ class Database
         return false;
 
     }
+
+    public function userLogin($username, $password){
+        $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+        // echo 'ARRRRRRRRRRRO';
+        // Create a prepared statement to select data using parameters.
+        $sql_query = "SELECT * FROM users WHERE username = ?";
+        $stmt = $connection->prepare($sql_query);
+        // Bind the parameter and execute the statement.
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        // Get the result and fetch the data.
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        if (!$row) {
+            echo "Username doesn't exist :/";
+        } else {
+            if (password_verify($password, $row['password'])) {
+                session_start();
+                // echo('PHPSESSID: ' . session_id($_GET['session_id']));
+                $_SESSION['username'] = $username;
+                $_SESSION["loggedin"] = true;
+                // echo "\n";
+                // echo $_SESSION['username'];
+                return "POGGERS";
+            } else {
+                $error = "Passwords do not match :/";
+                echo $error;
+            }
+        }
+        // Close the prepared statement.
+        $stmt->close();
+    // Close SQL connection.
+}
+
 
     private function executeStatement($query = "" , $params = [])
 
@@ -102,6 +147,15 @@ class Database
 
         }	
 
+    }
+
+    private function addRecord($query = "", $params = [], $username, $song, $artist, $rating){
+        // INSERT INTO ratings ()
+        // VALUES (@_DE, @_ASSUNTO, @_DATA)
+        // WHERE NOT EXISTS ( SELECT * FROM EmailsRecebidos 
+        //                 WHERE De = @_DE
+        //                 AND Assunto = @_ASSUNTO
+        //                 AND Data = @_DATA);
     }
 
 }

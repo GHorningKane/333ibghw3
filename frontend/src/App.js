@@ -1,50 +1,66 @@
-// import React, { useState, useEffect } from "react";
+// import logo from './logo.svg';
+// import './App.css';
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React
+//         </a>
+//       </header>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
-
+import SignUp from './signup2';
+import Login from './login';
 import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 function App() {
-  class MyForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { username: "", password: '' };
-    }
-    mySubmitHandler = (event) => {
-      event.preventDefault();
-      alert("You are submitting " + this.state.username);
-    };
-    myChangeHandler1 = (event) => {
-      this.setState({ username: event.target.value });
-    };
-    myChangeHandler2 = (event) => {
-      this.setState({ password: event.target.value });
-    };
-    myClickHandler = (event) => {
-      
-      var woof = "http://localhost/333ibghw3/index.php/user/list?username="+this.state.username+"&password="+this.state.password;
-      // alert (woof);
-      axios.post(woof)
-      .catch((error) => alert ("damn"));
-      alert("yo " + this.state.username + ", fr you wilding for having " + this.state.password + " as your password!")
-      
-    }
-    render() {
-      return (
-        <form onSubmit={this.mySubmitHandler}>
-          <h1>Hello {this.state.username}</h1>
-          <p>Enter your name, and submit:</p>
-          <input type="text" id = "username" onChange={this.myChangeHandler1} />
-          <input type="password" id = "password" onChange={this.myChangeHandler2} />
-          <input type="submit" onClick={this.myClickHandler} />
-        </form>
-      );
-    }
+    return(
+      <SignUp />
+    )
+
   }
 
+  export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  
-  ReactDOM.render(<MyForm />, document.getElementById("root"));
   // const [myData, setData] = useState([]);
     
   // useEffect(() => {
@@ -68,9 +84,7 @@ function App() {
   //     this.state.password
   //   </div>
   // ); 
-  }
-
-  export default App;
+ 
 
   // render() 
   // return (
