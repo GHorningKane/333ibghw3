@@ -6,7 +6,7 @@ class UserModel extends Database
 
 {
 
-    public function getUsers($limit)
+    public function getRatings($limit)
 
     {
         // echo"a";
@@ -28,35 +28,35 @@ class UserModel extends Database
     //     mysqli_stmt_execute($stmt);
     //     // Create prepared statement
     // }
-    public function createUsers2($username, $password)
-    {
-        $password_hash =  password_hash($password, PASSWORD_DEFAULT);
-        $exists = $this->select("SELECT * FROM users WHERE username = ?", ["s", $username]);
-        $type = gettype($exists);
-        $bool = gettype(false);
-        echo "\n".$bool.": boolio";
-        echo "\n".$type.": type \n";
-        echo '<pre>'; print_r($exists); echo '</pre>';
-        // if(mysqli_stmt_num_rows($exists) == 0){ //username not taken
-        if($exists === false){ //username not taken
-        // if(mysqli_stmt_num_rows( $this->select("SELECT * FROM ratings WHERE username = ?", ["s", $username])) == 0){ //username not taken
-            echo "false case: \n";
-            return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
+    // public function createUsers2($username, $password)
+    // {
+    //     $password_hash =  password_hash($password, PASSWORD_DEFAULT);
+    //     $exists = $this->select("SELECT * FROM users WHERE username = ?", ["s", $username]);
+    //     $type = gettype($exists);
+    //     $bool = gettype(false);
+    //     echo "\n".$bool.": boolio";
+    //     echo "\n".$type.": type \n";
+    //     echo '<pre>'; print_r($exists); echo '</pre>';
+    //     // if(mysqli_stmt_num_rows($exists) == 0){ //username not taken
+    //     if($exists === false){ //username not taken
+    //     // if(mysqli_stmt_num_rows( $this->select("SELECT * FROM ratings WHERE username = ?", ["s", $username])) == 0){ //username not taken
+    //         echo "false case: \n";
+    //         return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
             
-        }
-        elseif ($exists === "exists")
-        // elseif (mysqli_stmt_num_rows($exists) === 0)
-        {
-            echo "exists case: \n";
-        return $this->select("SELECT * FROM users WHERE username = ?", ["s", $username]);
-        }
+    //     }
+    //     elseif ($exists === "exists")
+    //     // elseif (mysqli_stmt_num_rows($exists) === 0)
+    //     {
+    //         echo "exists case: \n";
+    //     return $this->select("SELECT * FROM users WHERE username = ?", ["s", $username]);
+    //     }
 
-        else{
-            echo "else case: \n";
-        return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
+    //     else{
+    //         echo "else case: \n";
+    //     return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
      
-        }
-    }
+    //     }
+    // }
     public function login($username, $password){
         // echo "aaa\n";
         // echo $username;
@@ -64,16 +64,38 @@ class UserModel extends Database
         return $this->userLogin($username, $password);
     }
     // public function insertSong($username, $song, $artist, $rating){
-    public function addSong($username, $password){
+    public function addSong($username, $song, $artist, $rating){
         // return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)", ["sssi", $username, $song, $artist, $rating], $username, $song, $artist, $rating);
-        return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)  WHERE NOT EXISTS (SELECT * FROM ratings 
-                        WHERE username = ?
-                        AND song = ?
-                        AND artist = ?", ["sssi", $username, $song, $artist, $rating]);
+    //     return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)  WHERE NOT EXISTS (SELECT * FROM ratings 
+    //                     WHERE username = ?
+    //                     AND song = ?
+    //                     AND artist = ?", ["sssi", $username, $song, $artist, $rating]);
+    // }
+    // echo "made it to model";
+    $exists = $this->selectDupeAdd("SELECT * FROM ratings WHERE username = ? AND song = ? AND artist = ?", ["sss", $username, $song, $artist]);
+    // echo "huh?";
+        if (gettype($exists) == gettype("hello")){
+            echo "already submitted";
+            return "you've already submitted this song";
+        }
+        else 
+        {
+        // $password_hash =  password_hash($password, PASSWORD_DEFAULT);
+            echo "trying to add";
+            return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)", ["sssi", $username, $song, $artist, $rating]);
+        }
     }
     public function createUsers($username, $password){
         // return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)", ["sssi", $username, $song, $artist, $rating], $username, $song, $artist, $rating);
-        return $this->create("INSERT INTO users (username, password) VALUES (?, ?)  WHERE NOT EXISTS (SELECT * FROM users  WHERE username = ? AND password = ?)", ["ss", $username, $password]);
+        $exists = $this->selectDupe("SELECT * FROM users WHERE username = ?", ["s", $username]);
+        if (gettype($exists) == gettype("hello")){
+            return "username is taken";
+        }
+        else 
+        {
+        $password_hash =  password_hash($password, PASSWORD_DEFAULT);
+            return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
+        }
     }
 }
         // return $this->login($username, $password);

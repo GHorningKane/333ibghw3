@@ -34,7 +34,7 @@ class UserController extends BaseController
 
                 $userModel = new UserModel();
 
-                $intLimit = 10;
+                $intLimit = 100;
                 // echo"aaa\n";
                 // echo $_GET['limit'];
                 // echo"bbb\n";
@@ -51,7 +51,7 @@ class UserController extends BaseController
                 // echo"a\n";
                 // echo $intlimit;
                 // echo "LIKE HOW, TELL ME HOW";
-                $arrUsers = $userModel->getUsers($intLimit);
+                $arrUsers = $userModel->getRatings($intLimit);
 
                 $responseData = json_encode($arrUsers);
 
@@ -70,43 +70,49 @@ class UserController extends BaseController
                 $userModel = new UserModel();
                 $leusername = $_GET['username'];
                 $lepassword = $_GET['password'];
-                echo"aaa\n";
-                echo $_GET['username'];
-                echo"aaa\n";
-                echo $_GET['password'];
-                echo"bbb\n";
-                echo"bbb\n";
+                // echo"aaa\n";
+                // echo $_GET['username'];
+                // echo"aaa\n";
+                // echo $_GET['password'];
+                // echo"bbb\n";
+                // echo"bbb\n";
                 // $leusername = $arrQueryStringParams['username'];
                 // $lepassword = $arrQueryStringParams['password'];
                 $intLimit = 10;
 
-                if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['username']) {
-                    echo "username good";
-                }
-                else {
-                    // echo "woof";
-                    // echo $arrQueryStringParams['username'];
-                }
-                if (!$arrQueryStringParams){
-                    echo "YYYYYY";
-                    // echo $arrQueryStringParams['username'];
+                // if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['username']) {
+                //     // echo "username good";
+                // }
+                // else {
+                //     // echo "woof";
+                //     // echo $arrQueryStringParams['username'];
+                // }
+                // if (!$arrQueryStringParams){
+                //     // echo "YYYYYY";
+                //     // echo $arrQueryStringParams['username'];
 
-                }
-                if (isset($arrQueryStringParams['password']) && $arrQueryStringParams['password']) {
-                    echo "password good";
-                }
+                // }
+                // if (isset($arrQueryStringParams['password']) && $arrQueryStringParams['password']) {
+                //     // echo "password good";
+                // }
 
 
-                if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['password']) {
-                    // $leusername = $arrQueryStringParams['username'];
-                    // $lepassword = $arrQueryStringParams['password'];
-                }
+                // if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['password']) {
+                //     // $leusername = $arrQueryStringParams['username'];
+                //     // $lepassword = $arrQueryStringParams['password'];
+                // }
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }
             $answer = $userModel->createUsers($leusername, $lepassword);
+            if (gettype($answer) == gettype("string")){
+                echo "username is taken";
+                return "username is taken";
+            }
+            else{
             $responseData = json_encode($answer);
+            }
             // $userModel = new UserModel();
             // $intLimit = 10;
 
@@ -169,6 +175,7 @@ class UserController extends BaseController
     }
     public function addAction()
     {
+        // echo "surely we're here";
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $leusername = $_GET['username'];
@@ -176,12 +183,23 @@ class UserController extends BaseController
         $leartist = $_GET['artist'];
         $lerating = $_GET['rating'];
 
-        
         $userModel = new UserModel();
         if (strtoupper($requestMethod) == 'POST') {
+            // $answer = $userModel->createUsers($leusername, $lepassword);
+            // if (gettype($answer) == gettype("string")){
+            //     echo "username is taken";
+            //     return "username is taken";
+            // }
+            // else{
+            // $responseData = json_encode($answer);
+            // }
+            // echo "but not the catch?";
             try {
-                $arrUsers = $userModel->insertSong($leusername, $lesong, $leartist, $lerating);
+            // echo "\nor is it?";
+
+                $arrUsers = $userModel->addSong($leusername, $lesong, $leartist, $lerating);
                 $responseData = json_encode($arrUsers);
+                echo "safe in controller";
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';

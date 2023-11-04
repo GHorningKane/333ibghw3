@@ -36,18 +36,6 @@ class Database
 
         try {
             $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-            if($stmt = mysqli_prepare($connection, $query)){
-                mysqli_stmt_bind_param($stmt, "s", $params[1]);
-                if(mysqli_stmt_execute($stmt)){
-                    mysqli_stmt_store_result($stmt);
-                    if(mysqli_stmt_num_rows($stmt) == 0){ //username not taken
-                        echo "presumably not in database\n";
-                        return "num_rows==0";
-                    }
-                    else{
-                        // echo "psych!";
-                    }
-                }}
             $stmt = $this->executeStatement( $query , $params );
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);				
 
@@ -65,15 +53,75 @@ class Database
 
     }
 
+    public function selectDupe($query = "" , $params = [])
+
+    {
+
+        try {
+            $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            if($stmt = mysqli_prepare($connection, $query)){
+                mysqli_stmt_bind_param($stmt, "s", $params[1]);
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_store_result($stmt);
+                    if(mysqli_stmt_num_rows($stmt) == 0){ //username not taken
+                        echo "presumably not in database\n";
+                        $stmt = $this->executeStatement( $query , $params );
+                        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);				
+                        $stmt->close();
+                        return $result;
+                        return "num_rows==0";
+                    }
+                    else{
+                        // echo "so huh?";
+                        return "username is taken";
+                    }
+                }}  
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+        return false;
+    }
+    
+    public function selectDupeAdd($query = "" , $params = [])
+
+    {
+
+        try {
+            $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            if($stmt = mysqli_prepare($connection, $query)){
+                mysqli_stmt_bind_param($stmt, "sss", $params[1], $params[2], $params[3]);
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_store_result($stmt);
+                    if(mysqli_stmt_num_rows($stmt) == 0){ //song not already exists
+                        echo "presumably not in database\n";
+                        $stmt = $this->executeStatement( $query , $params );
+                        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);				
+                        $stmt->close();
+                        return $result;
+                        return "num_rows==0";
+                    }
+                    else{
+                        echo "already taken?";
+                        return "already submitted song";
+                    }
+                }}  
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+        return false;
+    }
+
     public function create($query = "" , $params = [])
 
     {
 
         try {
-
+            echo "ooga";
+            echo $params[1];
             $stmt = $this->executeStatement( $query , $params );
             $result = $stmt->get_result();				
             $stmt->close();
+            echo "we did it!";  
             return $result;
         } catch(Exception $e) {
             throw New Exception( $e->getMessage() );

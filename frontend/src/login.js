@@ -46,7 +46,9 @@ class Login extends React.Component {
           <input type="submit" onClick={this.myClickHandler} 
           disabled={!(this.state.check_password === this.state.password) || this.state.check_password.length <= 10 || !this.state.check_password.match(/\d/)}/>
         <p> If the submit buton is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
-          </p>       
+          </p>   
+          <p> If you can't login after making an account, make sure that you don't have a common username as there's a chance it has already been taken!
+            </p>    
         </form>
       );
     }

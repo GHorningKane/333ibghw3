@@ -41,7 +41,7 @@ class AddSong extends React.Component {
       return (
         <form onSubmit={this.mySubmitHandler}>
           <h1>Logged in as {localStorage.getItem('logged in')}</h1>
-          <p>Enter your name, and submit:</p>
+          <p>Enter the information about your song and submit! :D:</p>
           <p>Song:</p>
           <input type="text" id = "song" onChange={this.myChangeHandler1} />
           <p>Artist:</p>
