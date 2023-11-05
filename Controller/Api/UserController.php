@@ -207,4 +207,33 @@ class UserController extends BaseController
         } 
     }
 
+    public function deleteAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $leusername = $_GET['username'];
+        $lesong = $_GET['song'];
+        $leartist = $_GET['artist'];
+        echo "I'm here";
+
+        $userModel = new UserModel();
+        if (strtoupper($requestMethod) == 'DELETE') {
+
+            try {
+            // echo "\nor is it?";
+            echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
+
+                $userModel->deleteSong($leusername, $lesong, $leartist);
+                echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
+                $intLimit = 10;
+                $arrUsers = $userModel->getRatings($intLimit);
+                $responseData = json_encode($arrUsers);
+                // echo "safe in controller";
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } 
+    }
+
 }
