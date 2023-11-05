@@ -41,16 +41,21 @@ class LoginSPA extends React.Component {
     render() {
       return (
         <form onSubmit={this.mySubmitHandler}>
-          <h1>Hello {this.state.username}</h1>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1><span>Log in to Your Account! {this.state.username}</span></h1>
           <p>Enter your name, and submit:</p>
-          <p>Username:</p>
-          <input type="text" id = "username" onChange={this.myChangeHandler1} />
-          <p>Password:</p>
+            <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Username:</p>
+            <input type="text" id="username" onChange={this.myChangeHandler1} />
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Password:</p>
           <input type="password" id = "password" onChange={this.myChangeHandler2} />
+          <p>
+
+          </p>
           <input type="submit" onClick={this.myClickHandler} 
           disabled={this.state.password.length <= 10 || !this.state.password.match(/\d/)}/>
-        <p> If the submit buton is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
+        <p> If the submit button is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
           </p>       
+          </div>
         </form>
       );
     }

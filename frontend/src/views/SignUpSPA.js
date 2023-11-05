@@ -42,7 +42,8 @@ class SignUpSPA extends React.Component {
     render() {
       return (
         <form onSubmit={this.mySubmitHandler}>
-          <h1><span>Join our Community {this.state.username}!</span></h1>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1><span>Join the Community {this.state.username}!</span></h1>
           <p style={{ fontWeight: 'bold' }}>Username:</p>
           <input type="text" id = "username" onChange={this.myChangeHandler1} />
           <p style={{ fontWeight: 'bold' }}>Password:</p>
@@ -55,7 +56,8 @@ class SignUpSPA extends React.Component {
           <input type="submit" onClick={this.myClickHandler} 
           disabled={!(this.state.check_password === this.state.password) || this.state.check_password.length <= 10 || !this.state.check_password.match(/\d/)}/>
         <p> If the submit button is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
-          </p>       
+          </p> 
+          </div>      
         </form>
       );
     }
