@@ -34,7 +34,7 @@ class AddSong extends React.Component {
       // alert (woof);
       axios.post(woof)
       .catch((error) => alert ("damn"));
-      alert("yo " + localStorage.getItem('logged in') + ", fr you wilding for saying " + this.state.song + " by " + this.state.artist + " is a " + this.state.rating + " as your review!")
+      // alert("yo " + localStorage.getItem('logged in') + ", fr you wilding for saying " + this.state.song + " by " + this.state.artist + " is a " + this.state.rating + " as your review!")
       
     }
     render() {

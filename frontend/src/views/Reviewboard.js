@@ -12,6 +12,7 @@ function Reviewboard() {
   const [editedItem, setEditedItem] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletedItem, setDeletedItem] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
 
 
 
@@ -77,7 +78,14 @@ function Reviewboard() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ borderRadius: "10px", padding: "5px" }}
+      />
       <table>
         <thead>
           <tr>
@@ -93,6 +101,9 @@ function Reviewboard() {
         <tbody>
           {myData.map((item) => {
             const userIsUser = localStorage.getItem("logged in") === item.username;
+            const filteredData = myData.filter((item) => 
+            item.artist.toLowerCase().includes(searchTerm.toLowerCase())
+    )
             return (
               <tr key={item.id}>
                 <td>{item.username}</td>
