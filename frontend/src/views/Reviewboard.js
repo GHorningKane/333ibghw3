@@ -6,6 +6,7 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import StarRating from "../StarRating";
 
 function Reviewboard() {
     const [myData, setData] = useState([]);
