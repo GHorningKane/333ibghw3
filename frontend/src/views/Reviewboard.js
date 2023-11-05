@@ -7,6 +7,7 @@ import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import StarRating from "../StarRating";
+import StarRatingNonInteractable from "../StarRatingNonInteractable";
 
 function Reviewboard() {
     const [myData, setData] = useState([]);
@@ -46,8 +47,8 @@ function Reviewboard() {
             <td>{ item.username }</td>
             <td>{ item.artist }</td>
             <td>{ item.song }</td>
-            <td>{ item.rating }</td>
-            <td>{ item.id }</td>
+            <td>{ <StarRatingNonInteractable initialRating={item.rating} /> }</td>
+            <td>{ item.id }</td> 
           </tr>
         );
       })}
