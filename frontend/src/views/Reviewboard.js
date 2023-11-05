@@ -1,15 +1,30 @@
-// if (isPassed === "passpass") {
-//     return <Passed />;
-//   } 
-//   return <Failed />;
-
+//Imports
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRatingNonInteractable from "../StarRatingNonInteractable";
+import StarRating from "../StarRating"; // Import the StarRating component
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+
 function Reviewboard() {
   const [myData, setData] = useState([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editedItem, setEditedItem] = useState(null);
+
+  const handleEdit = (item) => {
+    setEditedItem(item);
+    setShowEditModal(true);
+  };
+
+  const handleCancelEdit = () => {
+    setShowEditModal(false);
+  };
+
+  const handleSaveEdit = () => {
+    // Handle saving the edited item
+    console.log("Edited Item:", editedItem); // Print the edited item to the console
+    setShowEditModal(false);
+  };
 
   useEffect(() => {
     axios
@@ -32,16 +47,13 @@ function Reviewboard() {
             <th>Song</th>
             <th>Rating</th>
             <th>ID</th>
-            <th>Edit</th> {/* Add Edit column header */}
-            <th>Delete</th> {/* Add Edit column header */}
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {myData.map((item) => {
-            // Setting up Condition for making edit/delete buttons appearing, to test...
-            // User: Bartek
-            //Pass: scT75ne2YZe!hbdr
-            const userIsUser = localStorage.getItem('logged in') === item.username;
+            const userIsUser = localStorage.getItem("logged in") === item.username;
             return (
               <tr key={item.id}>
                 <td>{item.username}</td>
@@ -51,15 +63,13 @@ function Reviewboard() {
                   <StarRatingNonInteractable initialRating={item.rating} />
                 </td>
                 <td>{item.id}</td>
-                {/* Edit button */}
                 <td>
                   {userIsUser && (
-                    <button onClick={() => /* Handle edit button click */ {}}>
+                    <button onClick={() => handleEdit(item)}>
                       <FaPencilAlt />
                     </button>
                   )}
                 </td>
-                {/* Delete button */}
                 <td>
                   {userIsUser && (
                     <button onClick={() => /* Handle delete button click */ {}}>
@@ -72,79 +82,63 @@ function Reviewboard() {
           })}
         </tbody>
       </table>
+
+      {/* Edit Modal */}
+      {showEditModal && editedItem && (
+        <div className="modal">
+          <h2>Edit Item</h2>
+          <form>
+            <div className="form-group">
+              <label htmlFor="artist">Artist</label>
+              <input
+                type="text"
+                id="artist"
+                name="artist"
+                value={editedItem.artist}
+                onChange={(e) => {
+                  const updatedItem = { ...editedItem, artist: e.target.value };
+                  setEditedItem(updatedItem);
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="song">Song</label>
+              <input
+                type="text"
+                id="song"
+                name="song"
+                value={editedItem.song}
+                onChange={(e) => {
+                  const updatedItem = { ...editedItem, song: e.target.value };
+                  setEditedItem(updatedItem);
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="rating">Rating</label>
+              <StarRating
+                initialRating={editedItem.rating}
+                onRatingChange={(newRating) => {
+                  const updatedItem = { ...editedItem, rating: newRating };
+                  setEditedItem(updatedItem);
+                }}
+              />
+            </div>
+          </form>
+          <button
+            onClick={() => {
+              console.log("Edited Item:", editedItem);
+              handleSaveEdit();
+            }}
+          >
+            Save
+          </button>
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Reviewboard;
 
-
-
-// function Reviewboard() {
-//     const [myData, setData] = useState([]);
-  
-//     useEffect(() => {
-//       axios
-//         .get("http://localhost/333ibghw3/index.php/user/list?limit=20")
-//         .then((response) => {
-//           // data is an object provided by the axios API that contains the data
-//           // https://axios-http.com/docs/res_schema
-//           setData(response.data);
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     }, []);
-  
-//     return (
-//       <div>
-//         {myData.map((item) => (
-//         //   <p key={item.id}>{[item.username, item.song, item.rating, item.id]}</p>
-//         <p key={item.id}>{item.username}</p>
-//         ))}
-//       </div>
-//     );
-//   }
-//   ReactDOM.render(<Reviewboard />, document.getElementById("root"));
-
-// }export default Reviewboard;
-
-    // constructor(props) {
-    //   super(props);
-    //   this.state = { username: "", password: '', loggedin: ''};
-    // }
-    // mySubmitHandler = (event) => {
-    //   event.preventDefault();
-
-    // };
-    // myChangeHandler1 = (event) => {
-    //   this.setState({ username: event.target.value });
-    // };
-    // myChangeHandler2 = (event) => {
-    //   this.setState({ password: event.target.value });
-    //   // alert("swag");
-    // };
-    // myClickHandler = (event) => {      
-    // }
-    // render() {
-    //   return (
-    //     axios.get("http://localhost/333ibghw3/index.php/user/list?limit=20")
-    //     <form onSubmit={this.mySubmitHandler}>
-    //       <h1>Hello {this.state.username}</h1>
-    //       <p>Enter your name, and submit:</p>
-    //       <p>Username:</p>
-    //       <input type="text" id = "username" onChange={this.myChangeHandler1} />
-    //       <p>Password:</p>
-    //       <input type="password" id = "password" onChange={this.myChangeHandler2} />
-    //       <input type="submit" onClick={this.myClickHandler} 
-    //       disabled={this.state.password.length <= 10 || !this.state.password.match(/\d/)}/>
-    //     <p> If the submit buton is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
-    //       </p>       
-    //     </form>
-    //   );
-//      }
-
-//   }
-
-
-//   export default Reviewboard;
