@@ -97,6 +97,30 @@ class UserModel extends Database
             return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
         }
     }
+    public function deleteRecord($recordId)
+    {
+        try {
+            // Define DELETE query with a WHERE clause to specify the record to delete.
+            $query = "DELETE FROM your_table_name WHERE id = ?";
+            $params = ["i", $recordId]; // Assuming 'id' is the primary key.
+
+            // Execute the delete statement.
+            $stmt = $this->executeStatement($query, $params);
+
+            if ($stmt) {
+                // Check if any rows were affected. If no rows were deleted, it means the record didn't exist.
+                if ($stmt->affected_rows > 0) {
+                    return true; // Deletion was successful.
+                }
+            }
+        } catch (Exception $e) {
+            // Handle any exceptions or errors here.
+            // You can log the error or return false to indicate a failure.
+            return false;
+        }
+
+        return false; // Deletion failed.
+    }
 }
         // return $this->login($username, $password);
         // $password_hash =  password_hash($password, PASSWORD_DEFAULT);

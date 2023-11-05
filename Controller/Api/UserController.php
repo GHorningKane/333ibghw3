@@ -207,4 +207,37 @@ class UserController extends BaseController
         } 
     }
 
+    public function deleteAction()
+{
+    $strErrorDesc = '';
+    $requestMethod = $_SERVER["REQUEST_METHOD"];
+    $recordId = $_GET['id']; // Assuming you're identifying the record by an 'id' parameter.
+
+    if (strtoupper($requestMethod) == 'DELETE') {
+        try {
+            $userModel = new UserModel();
+            // Invoke a method in UserModel to delete the record
+            $result = $userModel->deleteRecord($recordId);
+
+            if ($result) {
+                // Return a success response, e.g., HTTP 204 (No Content)
+                http_response_code(204);
+                echo json_encode(['message' => 'Record deleted successfully']);
+            } else {
+                // Handle the case where deletion failed
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to delete the record']);
+            }
+        } catch (Error $e) {
+            $strErrorDesc = $e->getMessage().' Something went wrong! Please contact support.';
+            $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+        }
+    } else {
+        $strErrorDesc = 'Method not supported';
+        $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+    }
+
+    // Handle and return any other errors or responses as needed.
+}
+
 }
