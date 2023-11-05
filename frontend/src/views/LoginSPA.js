@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 
-class LoginSPA extends React.Component {
+class AddSong extends React.Component {
     constructor(props) {
       super(props);
       this.state = { username: "", password: '', loggedin: ''};
@@ -39,28 +40,29 @@ class LoginSPA extends React.Component {
       
     }
     render() {
-      return (
-        <form onSubmit={this.mySubmitHandler}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h1><span>Log in to Your Account! {this.state.username}</span></h1>
-          <p>Enter your name, and submit:</p>
-            <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Username:</p>
-            <input type="text" id="username" onChange={this.myChangeHandler1} />
-          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Password:</p>
-          <input type="password" id = "password" onChange={this.myChangeHandler2} />
-          <p>
-
-          </p>
+    return (
+      <form onSubmit={this.mySubmitHandler}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1><span>Logged in as {localStorage.getItem('logged in')}</span></h1>
+          <p>Enter the information about your song and submit! :D:</p>
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Song:</p>
+          <input type="text" id="song" onChange={this.myChangeHandler1} />
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Artist:</p>
+          <input type="text" id="artist" onChange={this.myChangeHandler2} />
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Rating:</p>
+          <input type="text" id="rating" onChange={this.myChangeHandler3} />
+          <p></p>
           <input type="submit" onClick={this.myClickHandler} 
-          disabled={this.state.password.length <= 10 || !this.state.password.match(/\d/)}/>
-        <p> If the submit button is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
-          </p>       
-          </div>
-        </form>
-      );
-    }
+            disabled={!(this.state.song) || !(this.state.artist) || !(this.state.rating) || !(this.state.rating.match(/[1-5]/))}
+          />
+          <p>If the submit button is grayed out, it means you did not submit a number for your rating.</p>
+          
+          {/* Add a link or button for signup redirection */}
+          <Link to="/SignUpSPA">If you don't have an account, sign up!</Link>
+        </div>
+      </form>
+    );
   }
+}
 
-  ReactDOM.render(<LoginSPA />, document.getElementById("root"));
-
-  export default LoginSPA;
+export default AddSong;
