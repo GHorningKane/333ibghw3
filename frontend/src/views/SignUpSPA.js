@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import "./SignUp.css";
 import { Outlet, Link } from "react-router-dom";
 
 
@@ -17,8 +18,6 @@ class SignUpSPA extends React.Component {
       else {
         alert("Passwords don't match");
       }
-    //   alert(this.state.check_password);
-    //   alert(this.state.password);
     };
     myChangeHandler1 = (event) => {
       this.setState({ username: event.target.value });
@@ -43,20 +42,19 @@ class SignUpSPA extends React.Component {
     render() {
       return (
         <form onSubmit={this.mySubmitHandler}>
-          <h1>Hello {this.state.username}</h1>
-          <p>Enter your name, and submit:</p>
-          <p>Username:</p>
+          <h1><span>Join our Community {this.state.username}!</span></h1>
+          <p style={{ fontWeight: 'bold' }}>Username:</p>
           <input type="text" id = "username" onChange={this.myChangeHandler1} />
-          <p>Password:</p>
+          <p style={{ fontWeight: 'bold' }}>Password:</p>
           <input type="password" id = "password" onChange={this.myChangeHandler2} />
-          <p>Confirm Password:</p>
+          <p style={{ fontWeight: 'bold' }}>Confirm Password:</p>
           <input type="password" id = "check_password" onChange={this.myChangeHandler3} />
           <p>
 
          </p>
           <input type="submit" onClick={this.myClickHandler} 
           disabled={!(this.state.check_password === this.state.password) || this.state.check_password.length <= 10 || !this.state.check_password.match(/\d/)}/>
-        <p> If the submit buton is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
+        <p> If the submit button is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
           </p>       
         </form>
       );
