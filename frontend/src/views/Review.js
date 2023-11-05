@@ -33,7 +33,7 @@ class AddSong extends React.Component {
           <input type="submit" onClick={this.myClickHandler} 
             disabled={!(this.state.song) || !(this.state.artist) || !(this.state.rating) || !(this.state.rating.match(/[1-5]/))}
           />
-          <p>If the submit button is grayed out, it means you didn't completelyfill out the options 
+          <p>If the submit button is grayed out, it means you didn't completely fill out the options 
             or you did not submit a number for your rating.</p>
           
           {/* Add a link or button for signup redirection */}

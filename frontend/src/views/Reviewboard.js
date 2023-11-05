@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function Reviewboard() {
   const [myData, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
 
   useEffect(() => {
     // Simulate an API request with fake data
@@ -25,7 +26,21 @@ function Reviewboard() {
         username: "Johnathan",
         artist: "Kurt Cobain",
         song: "Love the Way You Lie",
-        rating: 5,
+        rating: 2,
+      },
+      {
+        id: 4,
+        username: "Carl",
+        artist: "Kurt Cobain",
+        song: "Another song",
+        rating: 1,
+      },
+      {
+        id: 5,
+        username: "Kevin",
+        artist: "Kurt Cobain",
+        song: "Song 2",
+        rating: 3,
       },
     ];
 
@@ -33,8 +48,19 @@ function Reviewboard() {
     setData(fakeData);
   }, []);
 
+  const filteredData = myData.filter((item) =>
+    item.artist.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ borderRadius: "10px", padding: "5px" }}
+      />
       <table>
         <thead>
           <tr>
@@ -46,14 +72,14 @@ function Reviewboard() {
           </tr>
         </thead>
         <tbody>
-          {myData.map((item) => {
+          {filteredData.map((item) => {
             return (
               <tr key={item.id}>
-                <td>{item.username}</td>
-                <td>{item.artist}</td>
-                <td>{item.song}</td>
-                <td>{item.rating}</td>
-                <td>{item.id}</td>
+                <td style={{ textAlign: "center" }}>{item.username}</td>
+                <td style={{ textAlign: "center" }}>{item.artist}</td>
+                <td style={{ textAlign: "center" }}>{item.song}</td>
+                <td style={{ textAlign: "center" }}>{item.rating}</td>
+                <td style={{ textAlign: "center" }}>{item.id}</td>
               </tr>
             );
           })}
