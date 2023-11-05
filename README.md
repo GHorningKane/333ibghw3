@@ -37,6 +37,8 @@ The REST API is what allows the software to communicate. Clients use HTTP method
 ## Delete
 <img width="407" alt="image" src="https://github.com/GHorningKane/333ibghw3/assets/132525147/e670ba51-aae9-430d-a267-4c01dd70a4c0">
 
+in order to see delete, you need to confirm at the bottom of the page, and then refresh!
+
 ## Edit
 <img width="342" alt="image" src="https://github.com/GHorningKane/333ibghw3/assets/132525147/360657e0-2f8b-4769-ba56-b144294221c5">
 
