@@ -99,8 +99,8 @@ class UserModel extends Database
     }
     public function deleteSong($username, $artist, $song)
     {
-        echo "yoooooooo";
-        return $this->delete("DELETE FROM ratings WHERE username = ? AND artist = ? and song = ?", ["sss", $username, $artist, $song]);
+        // echo "yoooooooo";
+        return $this->delete("DELETE FROM ratings WHERE username = ? AND artist = ? and song = ?", ["sss", $username, $song, $artist]);
     }
 
 }

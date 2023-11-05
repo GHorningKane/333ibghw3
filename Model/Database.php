@@ -168,13 +168,14 @@ public function delete($sql, $params = [])
     {
 
         try {
-            // echo $query;
+            // echo "\n";
+            // echo $sql;
             // echo ($params[0] .$params[1]. $params[2]. $params[3]);
+            // echo "\n";
             $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param(...$params);
             mysqli_stmt_execute($stmt);
-
             // mysqli_stmt_bind_param($stmt, "i", $id);
             //     if(mysqli_stmt_execute($stmt))
             //         header("location: reviewboard.php");

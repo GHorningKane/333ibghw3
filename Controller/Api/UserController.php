@@ -214,17 +214,17 @@ class UserController extends BaseController
         $leusername = $_GET['username'];
         $lesong = $_GET['song'];
         $leartist = $_GET['artist'];
-        echo "I'm here";
+        // echo "I'm here";
 
         $userModel = new UserModel();
         if (strtoupper($requestMethod) == 'DELETE') {
 
             try {
             // echo "\nor is it?";
-            echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
+            // echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
 
                 $userModel->deleteSong($leusername, $lesong, $leartist);
-                echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
+                // echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
                 $intLimit = 10;
                 $arrUsers = $userModel->getRatings($intLimit);
                 $responseData = json_encode($arrUsers);
