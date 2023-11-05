@@ -21,6 +21,7 @@ const Layout = () => {
         <nav style={navStyle}>
         <Link to="/SignUpSPA" style={linkStyle}>SignUp</Link>
         <Link to="/LoginSPA" style={linkStyle}>Login</Link>
+        <Link to="/Review" style={linkStyle}>Review</Link>
         <Link to="/Reviewboard" style={linkStyle}>Reviewboard</Link>
         <Link to="/AddSong" style={linkStyle}>AddSong</Link>
         </nav>

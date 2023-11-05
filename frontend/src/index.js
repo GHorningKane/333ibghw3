@@ -9,6 +9,7 @@ import SignUpSPA from "./views/SignUpSPA";
 import LoginSPA from "./views/LoginSPA";
 import Reviewboard from "./views/Reviewboard";
 import AddSong from "./views/AddSong";
+import Review from "./views/Review";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="LoginSPA" element={<LoginSPA />} />
           <Route path="Reviewboard" element={<Reviewboard />} />
           <Route path="AddSong" element={<AddSong />} />
+          <Route path="Review" element={<Review />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
