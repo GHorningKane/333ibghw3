@@ -41,7 +41,7 @@ class BaseController
     }
 
     /**
-
+     * 
 * Get querystring params.
 
 *
@@ -55,7 +55,7 @@ class BaseController
     {
 
         return parse_str($_SERVER['QUERY_STRING'], $query);
-
+        
     }
 
     /**
