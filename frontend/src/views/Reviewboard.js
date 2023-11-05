@@ -3,63 +3,81 @@
 //   } 
 //   return <Failed />;
 
-import React, {useState, useEffect} from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import StarRating from "../StarRating";
 import StarRatingNonInteractable from "../StarRatingNonInteractable";
-
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 function Reviewboard() {
-    const [myData, setData] = useState([]);
-  
-    useEffect(() => {
-      axios
-        // .get("https://jsonplaceholder.typicode.com/posts")
-  
-        .get("http://localhost/333ibghw3/index.php/user/list?limit=20")
-  
-        .then((response) => {
-          // data is an object provided by the axios API that contains the data
-          // https://axios-http.com/docs/res_schema
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
-  
-    return (
-      <div>
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Artist</th>
-        <th>Song</th>
-        <th>Rating</th>
-        <th>ID</th>
-      </tr>
-    </thead>
-    <tbody>
-      {myData.map(item => {
-        return (
-          <tr key={item.id}>
-            <td>{ item.username }</td>
-            <td>{ item.artist }</td>
-            <td>{ item.song }</td>
-            <td>{ <StarRatingNonInteractable initialRating={item.rating} /> }</td>
-            <td>{ item.id }</td> 
+  const [myData, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost/333ibghw3/index.php/user/list?limit=20")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Artist</th>
+            <th>Song</th>
+            <th>Rating</th>
+            <th>ID</th>
+            <th>Edit</th> {/* Add Edit column header */}
+            <th>Delete</th> {/* Add Edit column header */}
           </tr>
-        );
-      })}
-    </tbody>
-  </table>
-  
-  
-      </div>
-    );
-  }
+        </thead>
+        <tbody>
+          {myData.map((item) => {
+            // Setting up Condition for making edit/delete buttons appearing, to test...
+            // User: Bartek
+            //Pass: scT75ne2YZe!hbdr
+            const userIsUser = localStorage.getItem('logged in') === item.username;
+            return (
+              <tr key={item.id}>
+                <td>{item.username}</td>
+                <td>{item.artist}</td>
+                <td>{item.song}</td>
+                <td>
+                  <StarRatingNonInteractable initialRating={item.rating} />
+                </td>
+                <td>{item.id}</td>
+                {/* Edit button */}
+                <td>
+                  {userIsUser && (
+                    <button onClick={() => /* Handle edit button click */ {}}>
+                      <FaPencilAlt />
+                    </button>
+                  )}
+                </td>
+                {/* Delete button */}
+                <td>
+                  {userIsUser && (
+                    <button onClick={() => /* Handle delete button click */ {}}>
+                      <FaTrashAlt />
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default Reviewboard;
+
 
 
 // function Reviewboard() {
