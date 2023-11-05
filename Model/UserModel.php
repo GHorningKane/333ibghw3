@@ -97,7 +97,7 @@ class UserModel extends Database
             return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
         }
     }
-    public function deleteSong($username, $artist, $song)
+    public function deleteSong($username, $song, $artist)
     {
         // echo "yoooooooo";
         return $this->delete("DELETE FROM ratings WHERE username = ? AND artist = ? and song = ?", ["sss", $username, $song, $artist]);
