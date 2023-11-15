@@ -211,7 +211,7 @@ class UserController extends BaseController
                 // all the code as needed for editAction
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
-                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error OOGA BOOGA OOGA BOOGA';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }
         } 
     }
