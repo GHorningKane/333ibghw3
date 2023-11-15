@@ -163,20 +163,12 @@ class Database
         $stmt->close();
     // Close SQL connection.
 }
-    public function editSong($username, $password){
+    public function editSong($id, $username, $artist, $song, $rating){
         try {
 
             $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
-            if (isset($_REQUEST["submit"])) {
-                $out_value = "";
-                $id = $_REQUEST['id'];
-                $username = $_REQUEST['username'];
-                $artist = $_REQUEST['artist'];
-                $song = $_REQUEST['song'];
-                $rating = $_REQUEST['rating'];
-          
-    
+            
               $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
 
             if ($stmt = mysqli_prepare($conn, $sql)){
@@ -188,7 +180,7 @@ class Database
                   }
                 }
             //   mysqli_stmt_close($stmt);
-              }
+              
     	
 
             if ( mysqli_connect_errno()) {

@@ -210,39 +210,35 @@ class UserController extends BaseController
     // unimplemented
     public function editAction()
     {
-        $strErrorDesc = '';
-        $requestMethod = $_SERVER["REQUEST_METHOD"];
-        $leusername = $_GET['username'];
-        $lepassword = $_GET['password'];
-        $userModel = new UserModel();
-        if (strtoupper($requestMethod) == 'GET') {
+        if (isset($_REQUEST["submit"])) {
+            
+            $strErrorDesc = '';
+            $requestMethod = $_SERVER["REQUEST_METHOD"];
+            $out_value = "";
+            $id = $_GET['id'];
+            $username = $_GET['username'];
+            $artist = $_GET['artist'];
+            $song = $_GET['song'];
+            $rating = $_GET['rating'];
+        if (strtoupper($requestMethod) == 'PUT') {
             try {
-                $arrUsers = $userModel->login($leusername, $lepassword);
+                $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
                 $responseData = json_encode($arrUsers);
+                echo "safe in controller";
+                // all the code as needed for editAction
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }
         } 
     }
-    
-    // unimplemented
-    public function deleteAction()
-    {
-        $strErrorDesc = '';
-        $requestMethod = $_SERVER["REQUEST_METHOD"];
-        $leusername = $_GET['username'];
-        $lepassword = $_GET['password'];
-        $userModel = new UserModel();
-        if (strtoupper($requestMethod) == 'GET') {
-            try {
-                $arrUsers = $userModel->login($leusername, $lepassword);
-                $responseData = json_encode($arrUsers);
-            } catch (Error $e) {
-                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
-                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
-            }
-        } 
-    }
-
+    //LOOK HERE DUMMY!!!! 
+    //if (isset($_REQUEST["submit"])) {
+    //     $out_value = "";
+    //     $id = $_REQUEST['id'];
+    //     $username = $_REQUEST['username'];
+    //     $artist = $_REQUEST['artist'];
+    //     $song = $_REQUEST['song'];
+    //     $rating = $_REQUEST['rating'];
+    // // unimplemented
 }

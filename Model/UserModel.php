@@ -99,31 +99,8 @@ class UserModel extends Database
     }
     
     // unimplemented
-    public function createUsers($username, $password){
-        // return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)", ["sssi", $username, $song, $artist, $rating], $username, $song, $artist, $rating);
-        $exists = $this->selectDupe("SELECT * FROM users WHERE username = ?", ["s", $username]);
-        if (gettype($exists) == gettype("hello")){
-            return "username is taken";
-        }
-        else 
-        {
-        $password_hash =  password_hash($password, PASSWORD_DEFAULT);
-            return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
-        }
-    }
-    
-    // unimplemented
-    public function createUsers($username, $password){
-        // return $this->create("INSERT INTO ratings (username, song, artist, rating) VALUES (?, ?, ?, ?)", ["sssi", $username, $song, $artist, $rating], $username, $song, $artist, $rating);
-        $exists = $this->selectDupe("SELECT * FROM users WHERE username = ?", ["s", $username]);
-        if (gettype($exists) == gettype("hello")){
-            return "username is taken";
-        }
-        else 
-        {
-        $password_hash =  password_hash($password, PASSWORD_DEFAULT);
-            return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
-        }
+    public function editRatingPASS($id, $username, $artist, $song, $rating){
+        return $this->editSong($id, $username, $artist, $song, $rating);
     }
 }
         // return $this->login($username, $password);
