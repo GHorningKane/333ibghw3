@@ -202,11 +202,13 @@ class Database
             // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
             
               $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
-
+              echo "made it to database";
             if ($stmt = mysqli_prepare($conn, $sql)){
                   mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
+                  echo "made it past first if";
                   if(mysqli_stmt_execute($stmt)){
                       header("location: reviewboard.php");
+                      echo "made it past second if";
                   } else{
                       echo "Uh oh, it seems there was a failure, Please debug me";
                   }
