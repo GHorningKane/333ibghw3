@@ -213,8 +213,6 @@ class Database
              echo "missed if, oof!";
             //   mysqli_stmt_close($stmt);
               
-        
-
             if ( mysqli_connect_errno()) {
 
                 throw new Exception("Could not connect to database.");   
