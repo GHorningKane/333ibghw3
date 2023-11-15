@@ -13,7 +13,6 @@ class UserController extends BaseController
     public function listAction()
 
     {
-
         $strErrorDesc = '';
 
         $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -214,7 +213,7 @@ class UserController extends BaseController
         $leusername = $_GET['username'];
         $lesong = $_GET['song'];
         $leartist = $_GET['artist'];
-        // echo "I'm here";
+        echo "I'm here";
 
         $userModel = new UserModel();
         if (strtoupper($requestMethod) == 'DELETE') {
