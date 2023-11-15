@@ -237,7 +237,7 @@ class UserController extends BaseController
 
     public function editAction()
     {
-        if (isset($_REQUEST["submit"])) {
+       //if (isset($_REQUEST["submit"])) {
             
             $strErrorDesc = '';
             $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -258,6 +258,7 @@ class UserController extends BaseController
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }
         } 
+    //}
     }
     //LOOK HERE DUMMY!!!! 
     //if (isset($_REQUEST["submit"])) {
@@ -268,6 +269,5 @@ class UserController extends BaseController
     //     $song = $_REQUEST['song'];
     //     $rating = $_REQUEST['rating'];
     // // unimplemented
-}
 
 }
