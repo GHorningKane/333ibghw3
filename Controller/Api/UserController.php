@@ -248,7 +248,8 @@ class UserController extends BaseController
             $song = $_GET['song'];
             $rating = $_GET['rating'];
             echo "I'm here";
-        if (strtoupper($requestMethod) == 'PUT') {
+        
+            if (strtoupper($requestMethod) == 'POST') {
             try {
                 $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
                 $responseData = json_encode($arrUsers);
