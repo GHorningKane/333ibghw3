@@ -54,7 +54,7 @@ class UserModel extends Database
     public function editRatingPASS($id, $username, $artist, $song, $rating){
         echo "Pass Operational!";
         // return $this->editSong($id, $username, $artist, $song, $rating);
-        return $this->editSong("UPDATE ratings SET artist = ?, song = ?, rating = ? WHERE id = ?", ["ssii", $artist, $song, $rating, $id])
+        return $this->editSong("UPDATE ratings SET artist = ?, song = ?, rating = ? WHERE id = ?", ["ssii", $artist, $song, $rating, $id]);
     }
 }
 
