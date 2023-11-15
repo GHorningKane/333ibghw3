@@ -168,20 +168,12 @@ class Database
     {
 
         try {
-            // echo "\n";
-            // echo $sql;
-            // echo ($params[0] .$params[1]. $params[2]. $params[3]);
-            // echo "\n";
+        
             $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param(...$params);
             mysqli_stmt_execute($stmt);
-            // mysqli_stmt_bind_param($stmt, "i", $id);
-            //     if(mysqli_stmt_execute($stmt))
-            //         header("location: reviewboard.php");
-            // $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-            // $stmt = $this->executeStatement( $query , $params );
-            // $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);				
+        		
             echo "success";
             $stmt->close();
             // return $result;
@@ -203,6 +195,7 @@ class Database
             
               $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
               echo "made it to database";
+              echo "fart"
             // lowkey why do i have an if here lmao
              if ($stmt = mysqli_prepare($connection, $sql)){
                 //can't comment this out because then $stmt doesn't exit homie >_>
