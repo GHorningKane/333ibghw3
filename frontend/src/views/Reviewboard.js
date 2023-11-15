@@ -24,6 +24,7 @@ function Reviewboard() {
     // Handle saving the edited item
     console.log("Edited Item:", editedItem); // Print the edited item to the console
     setShowEditModal(false);
+    axios.put("http://localhost/33ibghw3/index.php/user/list?limit=20")
   };
 
   useEffect(() => {
