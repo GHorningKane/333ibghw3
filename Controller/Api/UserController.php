@@ -248,7 +248,7 @@ class UserController extends BaseController
             $song = $_GET['song'];
             $rating = $_GET['rating'];
             echo "I'm here";
-        
+            $userModel = new UserModel();
             if (strtoupper($requestMethod) == 'PUT') {
             try {
                 echo "test UC 1";
