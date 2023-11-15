@@ -204,7 +204,9 @@ class Database
               $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
               echo "made it to database";
             // lowkey why do i have an if here lmao
-             // if ($stmt = mysqli_prepare($conn, $sql)){
+             if ($stmt = mysqli_prepare($conn, $sql)){
+                //can't comment this out because then $stmt doesn't exit homie >_>
+                    echo "yee haw, in if :)";
                   mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
                   echo "made it past first if";
                   if(mysqli_stmt_execute($stmt)){
@@ -213,7 +215,9 @@ class Database
                   } else{
                       echo "Uh oh, it seems there was a failure, Please debug me";
                   }
-             // for first if   }
+            }
+        //  ^^ for first if   
+             echo "missed if, oof!";
             //   mysqli_stmt_close($stmt);
               
         

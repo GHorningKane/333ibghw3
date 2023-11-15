@@ -69,37 +69,9 @@ class UserController extends BaseController
                 $userModel = new UserModel();
                 $leusername = $_GET['username'];
                 $lepassword = $_GET['password'];
-                // echo"aaa\n";
-                // echo $_GET['username'];
-                // echo"aaa\n";
-                // echo $_GET['password'];
-                // echo"bbb\n";
-                // echo"bbb\n";
-                // $leusername = $arrQueryStringParams['username'];
-                // $lepassword = $arrQueryStringParams['password'];
+       
                 $intLimit = 10;
 
-                // if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['username']) {
-                //     // echo "username good";
-                // }
-                // else {
-                //     // echo "woof";
-                //     // echo $arrQueryStringParams['username'];
-                // }
-                // if (!$arrQueryStringParams){
-                //     // echo "YYYYYY";
-                //     // echo $arrQueryStringParams['username'];
-
-                // }
-                // if (isset($arrQueryStringParams['password']) && $arrQueryStringParams['password']) {
-                //     // echo "password good";
-                // }
-
-
-                // if (isset($arrQueryStringParams['username']) && $arrQueryStringParams['password']) {
-                //     // $leusername = $arrQueryStringParams['username'];
-                //     // $lepassword = $arrQueryStringParams['password'];
-                // }
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
@@ -112,15 +84,7 @@ class UserController extends BaseController
             else{
             $responseData = json_encode($answer);
             }
-            // $userModel = new UserModel();
-            // $intLimit = 10;
-
-            // $arrUsers = $userModel->getUsers($intLimit);
-
-            // $responseData = json_encode($arrUsers);
-            
-           
-            // $userModel -> createUser(array('Gavin11212121', '123456789'));
+     
 
         }
         else {
@@ -184,17 +148,8 @@ class UserController extends BaseController
 
         $userModel = new UserModel();
         if (strtoupper($requestMethod) == 'POST') {
-            // $answer = $userModel->createUsers($leusername, $lepassword);
-            // if (gettype($answer) == gettype("string")){
-            //     echo "username is taken";
-            //     return "username is taken";
-            // }
-            // else{
-            // $responseData = json_encode($answer);
-            // }
-            // echo "but not the catch?";
+    
             try {
-            // echo "\nor is it?";
 
                 $arrUsers = $userModel->addSong($leusername, $lesong, $leartist, $lerating);
                 $responseData = json_encode($arrUsers);
@@ -219,11 +174,9 @@ class UserController extends BaseController
         if (strtoupper($requestMethod) == 'DELETE') {
 
             try {
-            // echo "\nor is it?";
-            // echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
+        
 
                 $userModel->deleteSong($leusername, $lesong, $leartist);
-                // echo ("user " . $leusername . " song " . $lesong ."artist " . $leartist);
                 $intLimit = 10;
                 $arrUsers = $userModel->getRatings($intLimit);
                 $responseData = json_encode($arrUsers);
@@ -237,7 +190,6 @@ class UserController extends BaseController
 
     public function editAction()
     {
-       //if (isset($_REQUEST["submit"])) {
             
             $strErrorDesc = '';
             $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -262,7 +214,6 @@ class UserController extends BaseController
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }
         } 
-    //}
     }
     //LOOK HERE DUMMY!!!! 
     //if (isset($_REQUEST["submit"])) {
