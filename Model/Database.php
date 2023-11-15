@@ -206,7 +206,7 @@ class Database
 
             // lowkey why do i have an if here lmao
             //$stmt == mysqli_prepare($connection, $sql
-            if (1 == 1)){
+            if (1 == 1){
                 //can't comment this out because then $stmt doesn't exit homie >_>
                     echo "yee haw, in if :)";
                   $stmt->bind_param(...$params);
