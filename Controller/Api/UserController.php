@@ -206,5 +206,43 @@ class UserController extends BaseController
             }
         } 
     }
+    
+    // unimplemented
+    public function editAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $leusername = $_GET['username'];
+        $lepassword = $_GET['password'];
+        $userModel = new UserModel();
+        if (strtoupper($requestMethod) == 'GET') {
+            try {
+                $arrUsers = $userModel->login($leusername, $lepassword);
+                $responseData = json_encode($arrUsers);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } 
+    }
+    
+    // unimplemented
+    public function deleteAction()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $leusername = $_GET['username'];
+        $lepassword = $_GET['password'];
+        $userModel = new UserModel();
+        if (strtoupper($requestMethod) == 'GET') {
+            try {
+                $arrUsers = $userModel->login($leusername, $lepassword);
+                $responseData = json_encode($arrUsers);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } 
+    }
 
 }

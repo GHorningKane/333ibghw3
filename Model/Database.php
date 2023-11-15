@@ -163,6 +163,47 @@ class Database
         $stmt->close();
     // Close SQL connection.
 }
+    public function editSong($username, $password){
+        try {
+
+            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
+            if (isset($_REQUEST["submit"])) {
+                $out_value = "";
+                $id = $_REQUEST['id'];
+                $username = $_REQUEST['username'];
+                $artist = $_REQUEST['artist'];
+                $song = $_REQUEST['song'];
+                $rating = $_REQUEST['rating'];
+          
+    
+              $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
+
+            if ($stmt = mysqli_prepare($conn, $sql)){
+                  mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
+                  if(mysqli_stmt_execute($stmt)){
+                      header("location: reviewboard.php");
+                  } else{
+                      echo "Uh oh, it seems there was a failure, Please debug me";
+                  }
+                }
+            //   mysqli_stmt_close($stmt);
+              }
+    	
+
+            if ( mysqli_connect_errno()) {
+
+                throw new Exception("Could not connect to database.");   
+
+            }
+
+        } catch (Exception $e) {
+
+            throw new Exception($e->getMessage());   
+
+        }
+    
+    }
 
 
     private function executeStatement($query = "" , $params = [])
