@@ -103,6 +103,9 @@ class UserModel extends Database
         return $this->delete("DELETE FROM ratings WHERE username = ? AND song = ? and artist = ?", ["sss", $username, $song, $artist]);
     }
 
+    public function editRatingPASS($id, $username, $artist, $song, $rating){
+        return $this->editSong($id, $username, $artist, $song, $rating);
+    }
 }
         // return $this->login($username, $password);
         // $password_hash =  password_hash($password, PASSWORD_DEFAULT);

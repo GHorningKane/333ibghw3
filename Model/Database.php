@@ -164,7 +164,7 @@ class Database
     // Close SQL connection.
 }
 
-public function delete($sql, $params = [])
+    public function delete($sql, $params = [])
     {
 
         try {
@@ -195,6 +195,39 @@ public function delete($sql, $params = [])
 
     }
 
+    public function editSong($id, $username, $artist, $song, $rating){
+        try {
+
+            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
+            
+              $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
+
+            if ($stmt = mysqli_prepare($conn, $sql)){
+                  mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
+                  if(mysqli_stmt_execute($stmt)){
+                      header("location: reviewboard.php");
+                  } else{
+                      echo "Uh oh, it seems there was a failure, Please debug me";
+                  }
+                }
+            //   mysqli_stmt_close($stmt);
+              
+        
+
+            if ( mysqli_connect_errno()) {
+
+                throw new Exception("Could not connect to database.");   
+
+            }
+
+        } catch (Exception $e) {
+
+            throw new Exception($e->getMessage());   
+
+        }
+    
+    }
 
     private function executeStatement($query = "" , $params = [])
 
