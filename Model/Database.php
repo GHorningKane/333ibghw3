@@ -197,18 +197,18 @@ class Database
               echo "made it to database";
               echo "fart"
             // lowkey why do i have an if here lmao
-             if ($stmt = mysqli_prepare($connection, $sql)){
-                //can't comment this out because then $stmt doesn't exit homie >_>
-                    echo "yee haw, in if :)";
-                  mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
-                  echo "made it past first if";
-                  if(mysqli_stmt_execute($stmt)){
-                      header("location: reviewboard.php");
-                      echo "made it past second if";
-                  } else{
-                      echo "Uh oh, it seems there was a failure, Please debug me";
-                  }
-            }
+            //  if ($stmt = mysqli_prepare($connection, $sql)){
+            //     //can't comment this out because then $stmt doesn't exit homie >_>
+            //         echo "yee haw, in if :)";
+            //       mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
+            //       echo "made it past first if";
+            //       if(mysqli_stmt_execute($stmt)){
+            //           header("location: reviewboard.php");
+            //           echo "made it past second if";
+            //       } else{
+            //           echo "Uh oh, it seems there was a failure, Please debug me";
+            //       }
+            // }
         //  ^^ for first if   
              echo "missed if, oof!";
             //   mysqli_stmt_close($stmt);
