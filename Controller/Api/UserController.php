@@ -247,6 +247,7 @@ class UserController extends BaseController
             $artist = $_GET['artist'];
             $song = $_GET['song'];
             $rating = $_GET['rating'];
+            echo "I'm here";
         if (strtoupper($requestMethod) == 'PUT') {
             try {
                 $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
