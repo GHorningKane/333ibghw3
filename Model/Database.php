@@ -187,45 +187,45 @@ class Database
 
     }
 
-    public function editSong($id, $username, $artist, $song, $rating){
-        try {
+    // public function editSong($id, $username, $artist, $song, $rating){
+    //     try {
 
-            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-            // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
+    //         $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+    //         // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
             
-              $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
-              echo "made it to database";
-              echo "fart"
-            // lowkey why do i have an if here lmao
-             if ($stmt = mysqli_prepare($connection, $sql)){
-                //can't comment this out because then $stmt doesn't exit homie >_>
-                    echo "yee haw, in if :)";
-                  mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
-                  echo "made it past first if";
-                  if(mysqli_stmt_execute($stmt)){
-                      header("location: reviewboard.php");
-                      echo "made it past second if";
-                  } else{
-                      echo "Uh oh, it seems there was a failure, Please debug me";
-                  }
-            }
-        //  ^^ for first if   
-             echo "missed if, oof!";
-            //   mysqli_stmt_close($stmt);
+    //           $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";        //else update that row with a parameterized query.
+    //           echo "made it to database";
+    //           echo "fart"
+    //         // lowkey why do i have an if here lmao
+    //          if ($stmt = mysqli_prepare($connection, $sql)){
+    //             //can't comment this out because then $stmt doesn't exit homie >_>
+    //                 echo "yee haw, in if :)";
+    //               mysqli_stmt_bind_param($stmt, "ssii", $artist, $song, $rating, $id);
+    //               echo "made it past first if";
+    //               if(mysqli_stmt_execute($stmt)){
+    //                   header("location: reviewboard.php");
+    //                   echo "made it past second if";
+    //               } else{
+    //                   echo "Uh oh, it seems there was a failure, Please debug me";
+    //               }
+    //         }
+    //     //  ^^ for first if   
+    //          echo "missed if, oof!";
+    //         //   mysqli_stmt_close($stmt);
               
-            if ( mysqli_connect_errno()) {
+    //         if ( mysqli_connect_errno()) {
 
-                throw new Exception("Could not connect to database.");   
+    //             throw new Exception("Could not connect to database.");   
 
-            }
+    //         }
 
-        } catch (Exception $e) {
+    //     } catch (Exception $e) {
 
-            throw new Exception($e->getMessage());   
+    //         throw new Exception($e->getMessage());   
 
-        }
+    //     }
     
-    }
+    // }
 
     private function executeStatement($query = "" , $params = [])
 
