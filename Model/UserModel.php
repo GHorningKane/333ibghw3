@@ -104,8 +104,8 @@ class UserModel extends Database
     }
 
     public function editRatingPASS($id, $username, $artist, $song, $rating){
-        return $this->editSong($id, $username, $artist, $song, $rating);
         echo "Pass Operational!";
+        return $this->editSong($id, $username, $artist, $song, $rating);
     }
 }
         // return $this->login($username, $password);
