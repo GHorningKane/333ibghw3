@@ -189,35 +189,33 @@ class UserController extends BaseController
     }
 
     public function editAction()
-    // {
+    {
             
-    //         $strErrorDesc = '';
-    //         $requestMethod = $_SERVER["REQUEST_METHOD"];
-    //         $out_value = "";
-    //         $id = $_GET['id'];
-    //         $username = $_GET['username'];
-    //         $artist = $_GET['artist'];
-    //         $song = $_GET['song'];
-    //         $rating = $_GET['rating'];
-    //         echo "I'm here";
-    //         $userModel = new UserModel();
-    //         if (strtoupper($requestMethod) == 'PUT') {
-    //         try {
-    //             echo "test UC 1";
-    //             $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
-    //             echo "test UC 2";
-    //             $responseData = json_encode($arrUsers);
-    //             echo "safe in controller";
-    //             // all the code as needed for editAction
-    //         } catch (Error $e) {
-    //             $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
-    //             $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
-    //         }
-    //     } 
-    // }
-        {
-            echo "ooga booga";
-        }
+            $strErrorDesc = '';
+            $requestMethod = $_SERVER["REQUEST_METHOD"];
+            $out_value = "";
+            $id = $_GET['id'];
+            $username = $_GET['username'];
+            $artist = $_GET['artist'];
+            $song = $_GET['song'];
+            $rating = $_GET['rating'];
+            echo "I'm here";
+            $userModel = new UserModel();
+            if (strtoupper($requestMethod) == 'PUT') {
+            try {
+                echo "test UC 1";
+                $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
+                echo "test UC 2";
+                $responseData = json_encode($arrUsers);
+                echo "safe in controller";
+                // all the code as needed for editAction
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error OOGA BOOGA OOGA BOOGA';
+            }
+        } 
+    }
+
 
 
     //LOOK HERE DUMMY!!!! 
