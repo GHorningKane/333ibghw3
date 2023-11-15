@@ -249,9 +249,11 @@ class UserController extends BaseController
             $rating = $_GET['rating'];
             echo "I'm here";
         
-            if (strtoupper($requestMethod) == 'POST') {
+            if (strtoupper($requestMethod) == 'PUT') {
             try {
+                echo "test UC 1";
                 $arrUsers = $userModel->editRatingPASS($id, $username, $artist, $song, $rating);
+                echo "test UC 2";
                 $responseData = json_encode($arrUsers);
                 echo "safe in controller";
                 // all the code as needed for editAction
