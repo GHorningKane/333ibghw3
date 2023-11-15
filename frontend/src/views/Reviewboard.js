@@ -119,7 +119,7 @@ function Reviewboard() {
               <StarRating
                 initialRating={editedItem.rating}
                 onRatingChange={(newRating) => {
-                  const updatedItem = { ...editedItem, rating: newRating };
+                  const updatedItem = { ...editedItem, rating: newRating.target.value };
                   setEditedItem(updatedItem);
                 }}
               />
