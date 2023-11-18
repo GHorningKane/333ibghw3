@@ -191,8 +191,14 @@ class Database
     // public function editSong($id, $username, $artist, $song, $rating){
         public function editSong($sql, $params = []){
         try {
-
-            $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param(...$params);
+            mysqli_stmt_execute($stmt);
+        		
+            echo "success";
+            $stmt->close();
+            // $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             // ask about these parameters and if they need to be grabbed like this here. They might not due to other components.
             
             //   $sql = "UPDATE ratings SET artist=?, song=?, rating=? WHERE id=?";      
@@ -208,17 +214,17 @@ class Database
             // lowkey why do i have an if here lmao
             //$stmt == mysqli_prepare($connection, $sql)
             //if ($stmt == mysqli_prepare($connection, $sql)){
-                $stmt = mysqli_prepare($connection, $sql);
+                //$stmt = mysqli_prepare($connection, $sql);
                 //can't comment this out because then $stmt doesn't exit homie >_>
                     echo "yee haw, in if :)";
-                  $stmt->bind_param(...$params);
+                 // $stmt->bind_param(...$params);
                   echo "made it past first if";
-                  if(mysqli_stmt_execute($stmt)){
-                      header("location: reviewboard.php");
-                      echo "made it past second if";
-                  } else{
-                      echo "Uh oh, it seems there was a failure, Please debug me";
-                  }
+                //   if(mysqli_stmt_execute($stmt)){
+                //       header("location: reviewboard.php");
+                //       echo "made it past second if";
+                //   } else{
+                //       echo "Uh oh, it seems there was a failure, Please debug me";
+                //   }
         //    }
         //  ^^ for first if   
              echo "missed if, oof!";
