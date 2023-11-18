@@ -162,6 +162,7 @@ class Database
         // Close the prepared statement.
         $stmt->close();
     // Close SQL connection.
+    $conn->close();
 }
 
     public function delete($sql, $params = [])
@@ -206,7 +207,8 @@ class Database
 
             // lowkey why do i have an if here lmao
             //$stmt == mysqli_prepare($connection, $sql)
-            if ($stmt == mysqli_prepare($connection, $sql)){
+            //if ($stmt == mysqli_prepare($connection, $sql)){
+                $stmt = mysqli_prepare($connection, $sql)
                 //can't comment this out because then $stmt doesn't exit homie >_>
                     echo "yee haw, in if :)";
                   $stmt->bind_param(...$params);
@@ -217,7 +219,7 @@ class Database
                   } else{
                       echo "Uh oh, it seems there was a failure, Please debug me";
                   }
-            }
+        //    }
         //  ^^ for first if   
              echo "missed if, oof!";
             //   mysqli_stmt_close($stmt);
