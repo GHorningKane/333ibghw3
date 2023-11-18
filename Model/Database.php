@@ -191,6 +191,7 @@ class Database
     // public function editSong($id, $username, $artist, $song, $rating){
         public function editSong($sql, $params = []){
         try {
+            // OMG THIS WORKED BRUH
             $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param(...$params);
