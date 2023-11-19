@@ -24,7 +24,7 @@ function Reviewboard() {
   const handleCancelEdit = () => {
     setShowEditModal(false);
   };
-
+// http://localhost/333ibghw3/index.php/user/edit?id=11&username=Bartek&artist=Vacations&song=Relax&rating=4
   const handleSaveEdit = () => {
     axios
     .put("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
@@ -33,9 +33,9 @@ function Reviewboard() {
     })
     .catch((error) => {
       console.log(error);
-    
     alert(("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
     });
+
     //Handle saving the edited item
     console.log("Edited Item:", editedItem); // Print the edited item to the console
     setShowEditModal(false);
@@ -51,6 +51,7 @@ function Reviewboard() {
     .catch((error) => {
       console.log(error);
     });
+    
     // Handle saving the edited item
     console.log("Deleted Item:", deletedItem); // Print the edited item to the console
     setShowDeleteModal(false);
@@ -229,10 +230,17 @@ function Reviewboard() {
               />
             </div>
             {/* Left as a flex I guess due to what was being attempted vs what was in the final implementation *\_w_/* */}
-            <div className="form-group">
-              <label htmlFor="rating">Rating</label>
+            {/* <label htmlFor="rating">Rating</label>
               <StarRating
                 initialRating={deletedItem.rating}
+              /> */}
+            <div className="form-group">
+            <label htmlFor="rating">Rating</label>
+              <input
+                type="text"
+                id="rating"
+                name="rating"
+                value={deletedItem.rating}
               />
             </div>
           </form>
