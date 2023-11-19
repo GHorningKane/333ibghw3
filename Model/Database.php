@@ -164,7 +164,7 @@ class Database
     // Close SQL connection.
     $conn->close();
 }
-
+    // This functions ships the data to SQL and therefore deletes an entry in the database!
     public function delete($sql, $params = [])
     {
 
@@ -188,7 +188,7 @@ class Database
 
     }
 
-    // public function editSong($id, $username, $artist, $song, $rating){
+    // This functions ships the data to SQL and therefore writes to the database!
         public function editSong($sql, $params = []){
         try {
             // OMG THIS WORKED BRUH

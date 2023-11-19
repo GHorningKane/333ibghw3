@@ -45,6 +45,7 @@ class UserModel extends Database
             return $this->create("INSERT INTO users (username, password) VALUES (?, ?)", ["ss", $username, $password_hash]);
         }
     }
+    // Prepares Data for usage in 'editSong' and 'deleteSong'
     public function deleteSong($username, $song, $artist)
     {
         // echo "yoooooooo";

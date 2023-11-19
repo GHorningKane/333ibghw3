@@ -161,6 +161,8 @@ class UserController extends BaseController
         } 
     }
 
+    // Function at 'the start of the chain' for deleting a review!
+    // It takes data from the axios http request and puts parts of that data into nice usable states for 'UserModel.php' to operate on!
     public function deleteAction()
     {
         $strErrorDesc = '';
@@ -188,6 +190,8 @@ class UserController extends BaseController
         } 
     }
 
+    // Function at 'the start of the chain' for editing a review!
+    // It takes data from the axios http request and puts parts of that data into nice usable states for 'UserModel.php' to operate on!
     public function editAction()
     {
             

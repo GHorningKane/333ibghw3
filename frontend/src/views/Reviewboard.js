@@ -26,19 +26,19 @@ function Reviewboard() {
   };
 
   const handleSaveEdit = () => {
-    // axios
-    // .get("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
-    // .then((response) => {
-    //   // setData(response.data);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
+    axios
+    .put("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
+    .then((response) => {
+      // setData(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
     
-    // alert(("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
-    // });
-    // Handle saving the edited item
-    // console.log("Edited Item:", editedItem); // Print the edited item to the console
-    // setShowEditModal(false);
+    alert(("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
+    });
+    //Handle saving the edited item
+    console.log("Edited Item:", editedItem); // Print the edited item to the console
+    setShowEditModal(false);
 
   };
 
@@ -138,6 +138,7 @@ function Reviewboard() {
         <div className="modal">
           <h2>Edit Item</h2>
           <form>
+            {/* Artist form */}
             <div className="form-group">
               <label htmlFor="artist">Artist</label>
               <input
@@ -151,6 +152,7 @@ function Reviewboard() {
                 }}
               />
             </div>
+            {/* Song form */}
             <div className="form-group">
               <label htmlFor="song">Song</label>
               <input
@@ -164,7 +166,21 @@ function Reviewboard() {
                 }}
               />
             </div>
+            {/* Rating form */}
             <div className="form-group">
+              <label htmlFor="rating">Rating</label>
+              <input
+                type="text"
+                id="song"
+                name="song"
+                value={editedItem.rating}
+                onChange={(e) => {
+                  const updatedItem = { ...editedItem, rating: e.target.value };
+                  setEditedItem(updatedItem);
+                }}
+              />
+            </div>
+            {/* <div className="form-group">
               <label htmlFor="rating">Rating</label>
               <StarRating
                 initialRating={editedItem.rating}
@@ -173,8 +189,9 @@ function Reviewboard() {
                   setEditedItem(updatedItem);
                 }}
               />
-            </div>
+            </div> */}
           </form>
+           {/* Button and handling of saving data for 'handleSaveEdit'  */}
           <button
             onClick={() => {
               console.log("Edited Item:", editedItem);
@@ -191,6 +208,7 @@ function Reviewboard() {
         <div className="modal">
           <h2>Delete Item</h2>
           <form>
+            {/* Artist Form */}
             <div className="form-group">
               <label htmlFor="artist">Artist</label>
               <input
@@ -200,6 +218,7 @@ function Reviewboard() {
                 value={deletedItem.artist}
               />
             </div>
+            {/* Song form */}
             <div className="form-group">
               <label htmlFor="song">Song</label>
               <input
@@ -209,6 +228,7 @@ function Reviewboard() {
                 value={deletedItem.song}
               />
             </div>
+            {/* Left as a flex I guess due to what was being attempted vs what was in the final implementation *\_w_/* */}
             <div className="form-group">
               <label htmlFor="rating">Rating</label>
               <StarRating
@@ -216,6 +236,7 @@ function Reviewboard() {
               />
             </div>
           </form>
+          {/* Button and handling of saving data for 'handleSaveDelete'  */}
           <button
             onClick={() => {
               console.log("Deleted Item:", deletedItem);
