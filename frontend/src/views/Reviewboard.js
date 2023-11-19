@@ -27,13 +27,13 @@ function Reviewboard() {
 // http://localhost/333ibghw3/index.php/user/edit?id=11&username=Bartek&artist=Vacations&song=Relax&rating=4
   const handleSaveEdit = () => {
     axios
-    .put("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
+    .put("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.ID+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
     .then((response) => {
       // setData(response.data);
     })
     .catch((error) => {
       console.log(error);
-    alert(("http://localhost/333ibghw3/index.php/user/edit?username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
+    alert(("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.ID+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
     });
 
     //Handle saving the edited item
