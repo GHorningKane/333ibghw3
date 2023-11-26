@@ -297,7 +297,7 @@ function Reviewboard() {
           >
             Delete
           </button>
-          <button onClick={handleCancelEdit}>Cancel</button>
+          <button onClick={handleCancelDelete}>Cancel</button>
         </div>
       )}
     </div>
