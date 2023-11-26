@@ -23,6 +23,7 @@ function Reviewboard() {
     setEditedItem(item);
     setEditedItemId(item.id); // Store the ID of the edited song
     setShowEditModal(true);
+    
   };
 
   const handleCancelEdit = () => {
@@ -46,6 +47,7 @@ function Reviewboard() {
     //Handle saving the edited item
     console.log("Edited Item:", editedItem); // Print the edited item to the console
     setShowEditModal(false);
+    window.location.reload(false);
 
   };
 
@@ -62,6 +64,7 @@ function Reviewboard() {
     // Handle saving the edited item
     console.log("Deleted Item:", deletedItem); // Print the edited item to the console
     setShowDeleteModal(false);
+    window.location.reload(false);
 
   };
   
