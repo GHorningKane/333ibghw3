@@ -13,27 +13,30 @@ function Reviewboard() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletedItem, setDeletedItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
-
-
+  const [editedItemId, setEditedItemId] = useState(null); // State to store the ID of the edited song
 
   const handleEdit = (item) => {
     setEditedItem(item);
+    setEditedItemId(item.id); // Store the ID of the edited song
     setShowEditModal(true);
   };
 
   const handleCancelEdit = () => {
     setShowEditModal(false);
   };
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
+  };
 // http://localhost/333ibghw3/index.php/user/edit?id=11&username=Bartek&artist=Vacations&song=Relax&rating=4
   const handleSaveEdit = () => {
     axios
-    .put("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.ID+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
+    .put("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.id+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating)
     .then((response) => {
       // setData(response.data);
     })
     .catch((error) => {
       console.log(error);
-    alert(("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.ID+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
+    alert(("http://localhost/333ibghw3/index.php/user/edit?id="+editedItem.id+"&username="+localStorage.getItem("logged in")+"&song="+editedItem.song+"&artist="+editedItem.artist+"&rating="+editedItem.rating))
     });
 
     //Handle saving the edited item
@@ -135,10 +138,41 @@ function Reviewboard() {
       </table>
 
       {/* Edit Modal */}
+      {/* {showEditModal && editedItem && (
+  <div className="modal">
+    <h2>Edit Item</h2>
+    <div>
+      <p>ID: {editedItem.id}</p>
+    </div>
+    <form>
+      <div className="form-group">
+        <label htmlFor="id">ID</label>
+        <input
+          type="text"
+          id="id"
+          name="id"
+          value={editedItem.id}
+          readOnly // Make this field read-only so the ID cannot be edited
+        />
+      </div> */}
       {showEditModal && editedItem && (
         <div className="modal">
           <h2>Edit Item</h2>
+          <div>
+            <p>ID: {editedItem.id}</p>
+          </div>
           <form>
+            {/* ID form (non-interactable) */}
+            <div className="form-group">
+              <label htmlFor="id">ID</label>
+             <input
+                type="text"
+                id="id"
+                name="id"
+                value={editedItem.id}
+                readOnly // Make this field read-only so the ID cannot be edited
+              />
+            </div>
             {/* Artist form */}
             <div className="form-group">
               <label htmlFor="artist">Artist</label>
@@ -196,7 +230,7 @@ function Reviewboard() {
           <button
             onClick={() => {
               console.log("Edited Item:", editedItem);
-              handleSaveEdit();
+              handleSaveEdit(editedItemId); // Pass the ID to the save function
             }}
           >
             Save
