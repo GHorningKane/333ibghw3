@@ -21,7 +21,7 @@ The app provides a user-friendly interface for managing song collection and seei
 
 
 # Setting Up
-1. Pull from the repo and cd into the 'frontend' folder.
+1. Pull from the latest commit of the 'mainMerge1' branch and cd into the 'frontend' folder.
 2. Run/execute 'npm i'.
 3. If you recieve errors upon starting the react server install dependencies individually. (npm install react-icons, npm install react-router-dom, npm install axios)
 4. Make a copy of the repo and put it into wherever you may manage your backend directly inside of 'htdocs'. (./htdocs/333ibghw3)
