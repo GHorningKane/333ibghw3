@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import { Outlet, Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 class AddSong extends React.Component {
@@ -40,13 +40,14 @@ class AddSong extends React.Component {
     render() {
       return (
         <form onSubmit={this.mySubmitHandler}>
-          <h1>Logged in as {localStorage.getItem('logged in')}</h1>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1><span>Logged in as {localStorage.getItem('logged in')}</span></h1>
           <p>Enter the information about your song and submit! :D:</p>
-          <p>Song:</p>
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Song:</p>
           <input type="text" id = "song" onChange={this.myChangeHandler1} />
-          <p>Artist:</p>
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Artist:</p>
           <input type="text" id = "artist" onChange={this.myChangeHandler2} />
-          <p>Rating:</p>
+          <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>Rating:</p>
           <input type="text" id = "rating" onChange={this.myChangeHandler3} />
           <p>
 
@@ -54,8 +55,9 @@ class AddSong extends React.Component {
           <input type="submit" onClick={this.myClickHandler} 
           disabled={!(this.state.song) || !(this.state.artist) || !(this.state.rating) || !(this.state.rating.match(/[1-5]/))}/>
         {/* //   this.state.check_password.length <= 10 || !this.state.check_password.match(/\d/)}/> */}
-        <p> If the submit buton is greyed out, it either means your password isn't safe, above 10 characters in length and contain at least one number, or they don't match.
+        <p> If the submit button is greyed out, it means you did not submit a number for your rating.
           </p>       
+          </div>
         </form>
       );
     }

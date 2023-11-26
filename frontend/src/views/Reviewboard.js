@@ -15,6 +15,10 @@ function Reviewboard() {
   const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
   const [editedItemId, setEditedItemId] = useState(null); // State to store the ID of the edited song
 
+  const filteredData = myData.filter((item) =>
+    item.artist.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const handleEdit = (item) => {
     setEditedItem(item);
     setEditedItemId(item.id); // Store the ID of the edited song
@@ -81,6 +85,7 @@ function Reviewboard() {
       });
   }, []);
 
+
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
       <input
@@ -103,20 +108,24 @@ function Reviewboard() {
           </tr>
         </thead>
         <tbody>
-          {myData.map((item) => {
+          // changed this filtered underneath from myData
+        {filteredData.map((item) => {
             const userIsUser = localStorage.getItem("logged in") === item.username;
             const filteredData = myData.filter((item) => 
             item.artist.toLowerCase().includes(searchTerm.toLowerCase())
     )
             return (
               <tr key={item.id}>
-                <td>{item.username}</td>
-                <td>{item.artist}</td>
-                <td>{item.song}</td>
-                <td>
+
+
+                <td style={{ textAlign: "center" }}>{item.username}</td>
+                <td style={{ textAlign: "center" }}>{item.artist}</td>
+                <td style={{ textAlign: "center" }}>{item.song}</td>
+             
+                <td style={{ textAlign: "center" }}>
                   <StarRatingNonInteractable initialRating={item.rating} />
                 </td>
-                <td>{item.id}</td>
+                <td style={{ textAlign: "center" }}>{item.id}</td>
                 <td>
                   {userIsUser && (
                     <button onClick={() => handleEdit(item)}>
@@ -131,7 +140,8 @@ function Reviewboard() {
                     </button>
                   )}
                 </td>
-              </tr>
+
+          </tr>
             );
           })}
         </tbody>
@@ -297,4 +307,3 @@ function Reviewboard() {
 }
 
 export default Reviewboard;
-

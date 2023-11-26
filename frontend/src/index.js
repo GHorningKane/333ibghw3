@@ -9,6 +9,7 @@ import SignUpSPA from "./views/SignUpSPA";
 import LoginSPA from "./views/LoginSPA";
 import Reviewboard from "./views/Reviewboard";
 import AddSong from "./views/AddSong";
+import Review from "./views/Review";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="LoginSPA" element={<LoginSPA />} />
           <Route path="Reviewboard" element={<Reviewboard />} />
           <Route path="AddSong" element={<AddSong />} />
+          <Route path="Review" element={<Review />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
@@ -31,51 +33,3 @@ export default function App() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
-
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import './index.css';
-// import App from './App';
-// import reportWebVitals from './reportWebVitals';
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// render({
-// const strings = ["Home", "Shop", "About Me"];
-// const listItems = strings.map((string) => <li>{string}</li>);
-// <ul>{listItems}</ul>;
-// (listItems, document.getElementById("root"))
-// });
-
-// // If you want to start measuring performance in your app, pass a function
-// // to log results (for example: reportWebVitals(console.log))
-// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// // reportWebVitals();

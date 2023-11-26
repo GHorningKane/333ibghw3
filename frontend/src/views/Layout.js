@@ -1,39 +1,34 @@
-// Layout.js
-
+import "./SignUp.css";
 import { Outlet, Link } from "react-router-dom";
 
 const Layout = () => {
+  const navStyle = {
+    display: "flex",
+    justifyContent: "space-around",
+    backgroundColor: "#FF8B26", // Add your desired background color
+    padding: "10px",
+  };
+
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white",
+    fontWeight: 'bold',
+  };
+
   return (
-    <>
-      <nav>
-        <ul>
-          {/* <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/blogs">Blogs</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li> */}
-          <li>
-            <Link to="/SignUpSPA">SignUp</Link>
-          </li>
-          <li>
-            <Link to="/LoginSPA">Login</Link>
-          </li>
-          <li>
-            <Link to="/Reviewboard">Reviewboard</Link>
-          </li>
-          {/* ONLY DISPLAY IF LOGGED INNNNNNNNNNNNNNNNNNNNNNNn */}
-          <li>
-            <Link to="/AddSong">AddSong</Link>
-          </li>
-        </ul>
-      </nav>
+    <div>
+      <header>
+        <nav style={navStyle}>
+        <Link to="/SignUpSPA" style={linkStyle}>SignUp</Link>
+        <Link to="/LoginSPA" style={linkStyle}>Login</Link>
+        <Link to="/Review" style={linkStyle}>Review</Link>
+        <Link to="/Reviewboard" style={linkStyle}>Reviewboard</Link>
+        <Link to="/AddSong" style={linkStyle}>AddSong</Link>
+        </nav>
+      </header>
 
       <Outlet />
-    </>
+    </div>
   );
 };
 
