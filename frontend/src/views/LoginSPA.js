@@ -31,7 +31,7 @@ class LoginPage extends React.Component {
     }
     render() {
       return (
-        <form onSubmit={this.mySubmitHandler}>
+        <form onSubmit={this.myClickHandler}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h1><span>Login</span></h1>
             <p>Enter your username and password to log in:</p>
